@@ -1,0 +1,465 @@
+BENEFÍCIO DE APRENDER 2 TECNOLOGIAS
+
+- Controle de versão
+- Armazenamento em nuvem
+- Trabalho em equipe
+- Melhorar seus códigos
+- Reconecimento
+
+
+==================      CMD     ========================
+
+# Comandos básicos de navegação no Terminal - CMD
+
+>DIR (diretório)-  Mostra tudo que tem dentro da pasta do usuário [c:\users]
+> CD - entra na pasta que escolher
+	Ex. Você quer entrar na pasta C:
+
+	Como quando executamos o comando win+cmd, ele já abre dentro da pasta 	c:\user\"usuário", precisamos executar comando até que mostre a pasta C:
+
+Para mostrar somente a pasta C: , vamos executar o comando "cd.."
+> cd.. - serve tanto para voltar comandos já execultados ou voltar pastas
+
+	# c:\users\CMP> cd..
+	   c:\users> cd..
+	   c:\
+
+Executando agora o * DIR, veremos o que temos na pasta C:
+
+Vamos agora entrar em uma das pastas do C:. A windows por exemplo.
+
+	c:\> cd windows
+	c:\windows>
+	c:\windows>dir
+
+Entramos na pasta windows, execumatos o comando "dir" para exibir o conteudo que tem dentro da pasta windows.
+
+
+>CLS - comando de limpesa. Quando vc já executou muitos comandos, a tela #cmd está cheia, esse comando limpa a tela. Fica uma lousa limpa pra escrever novamente.
+
+>MKDIR - Criador de pastas.
+
+Vamos criar uma pasta dentro da pasta C;
+
+	c:\> mkdir workspace
+	c:\workspace	(criamos a pasta)	
+
+Vamos criar um arquivo dentro da pasta "workspace". um arquivo .txt pelo terminal  #cmd
+
+#ECHO - repete a palavra ou o texto digitado.
+# > - É um redirecionador de fluxo. tipo, ele cria o arquivo .txt com o nome que vc quiser usando o comando "echo > "
+
+Como queremos criar um arquivo .txt, vamos criar usando o comando [ echo+> ].
+Já estamos dentro da pasta "workspace"
+	
+	c:\workspace> echo > teste.txt
+
+Se não aparece nenhuma mensagem, o comando deu certo, não deu problema.
+
+	c:\workspace> dir
+
+Executando o >dir , confirmamos que o arquivo foi criado.
+
+# DELETAR
+
+Podemos deletar arquivos de duas maneiras pelo terminal.
+
+1 - >DEL -  deleta os arquivos dentro da pasta que você está
+
+
+Ex.
+	C:\ >del workspace	+ enter
+O sistema vai perguntar se você quer deletar tudo que está dentro da pasta. Se quer (S) Se não (N)
+
+Para confirmar, executamos o "dir";
+
+A pasta "workspace" continua lá, o que o comando apagou foi só os arquivos que tinha fora de outras pastas que existem dentro da pasta "workspace".
+
+
+2 - RMDIR - Ele remove a pasta principal (repositório) e todas as pastas e arquivos dentro desse repositório.
+
+	C:\>rmdir workspace  /s /q +enter
+ Se não apareceu nenhuma mensagem, o comando deu certo.
+
+Vamos confirmar.
+
+	c:\>dir
+
+A pasta sumiu, não existe mais
+
+
+ # /s - Exclui uma árvore de diretório (o diretório especificado e todos os seus subdiretórios, incluindo todos os arquivos).
+ # /q - Especifica o modo silencioso. Não solicita confirmação ao excluir uma árvore de diretório. O parâmetro /q só funcionará se /s também for especificado.
+**CUIDADO: Quando você executa no modo silencioso, toda a árvore de diretório é excluída sem confirmação. Verifique se arquivos importantes são movidos ou feito backup antes de usar a opção de linha de comando /q .
+
+
+ - ( seta para cima ) ->  quando você usa essa seta, ela vai mostrando os comando que você já utilizou
+
+
+====================   GIT  ========================
+
+
+CHAVE SSH & TOKENS
+
+CHAVE SSH - Uma forma de estabelecer uma conexão segura entre duas máquinas.
+
+Ex.  Github e a máquina que você está trabalhando
+
+Precisamos criar uma conta no site github.com para comunicação entre as maquinas
+
+>> Comandos SSH
+
+
+Chaves já existentes
+O primeiro passo é executar um comando para saber se já existem chaves ssh na máquina. Por padrão o nome delas devem ser um desses: "id_rsa.pub", "id_ecdsa.pub" ou "id_ed25519.pub".
+
+Para listar as existentes, executar o comando:  
+
+	$ls -al ~/.ssh + enter ( mostra a lista de chaves já existentes)
+
+*ed25519 - é chave padrão na máquina
+
+Não tendo nenhuma chave, vamos gerar uma chave para inicio de trabalhos.
+
+
+ >>> GERAR UMA CHAVE NOVA
+
+	$ ssh-keygen -t ed25519 -C "o email que vc vai usar"
+O git mostra o local onde a chave vai morar depois da chave gerada;
+
+( /C:/Users/CMP/.ssh/id_ed25519 ):
+ele pede uma senha, vc coloca uma senha que não vai esquecer.
+
+vamos navegar na pasta.
+	$ cd /c/users/cmp/.ssh/ + enter
+	$ ls + enter ( vai mostrar o que tem dentro da pasta )
+	vai mostrar as 2 chaver geradas, a pública e a privada
+
+# $ cat id_ed25519.pub + enter ( vai me mmostrar o que tem dentro dessa chave )
+ A chave que vamos expor no github é a chave pública.
+
+Copiamos essa chave e colocamos no github.com no SSH Keys, e salvamos.
+
+# $ pwd + enter ( esse comando mostra o caminho completo da pasta onde estamos )
+
+Vamos inicializar o ssh-keygen
+	$ eval $(ssh-agent -s ) + enter
+
+Depois de inicializado projeto vamos entregar a chave pra ele, vamos executar o comando para entregar a chave.
+
+	$ ssh-add id_ed25519 + enter
+	ele pede a senha que vc já inseriu anteriormente;
+	 Ele mostra : entidade adicionada e o email que foi adicionado
+
+A chave que passamos foi a privada, porque toda vez que chegar uma criptografia com essa chave, ele vai usar a nossa chave privada pra descriptografar essa mensagem. O agent fica encarregado de perceber esse tipo de coisa.
+
+Agora vamos validar tudo;
+
+Vamos no tite github, copiar um repositório, que já foi inserido e colar lá no gitbash
+
+	$ git clone + o site copiado + enter ( espera carregar os arquivos da página )
+
+	$ ls + enter
+	mostra o reposiório.
+	chave devidamente configurada e funcionando
+	
+# $ctrl+L  ( limpa a tela " lousa")
+
+
+ >> 2º forma de autenticação segura que o github oferece é o TOKEN DE ACESSO PESSOAL
+
+Voce gera um token no  github, vai guarda na sua máquina ou em algum outro lugar, e sempre que vc for fazer um commit , o git vai pedir seu usuário e a senha. N a hora da senha vc vai colocar o seu TOKEN PESSOAL.
+Não é um arquivo pequeno, fácil de memorizar.
+
+> no github na area de deleoper settins>>personal access tokens>genered new tokens.
+
+Isso para gerar o token.
+** TENHA CERTEZA QUE VOCÊ COPIOU O TOKEN ANTES DE SAIR DA PÁGINA. PORQUE ELE NÃO MOSTRA A CHAVE TOKEN DEPOIS**
+
+	$ git clone + URL + enter
+	aparece a tela pedindo pra se conectar no github
+	repositório baixado por token
+
+
+
+============== PRIMEIROS COMANDOS COM GIT ==================
+
+Quando estamos lidando com o terminal, colocamos sempre o nome do programa na frente. estaremos chamando pelo terminal o GIT, estaremos chamando pelo terminal comando especificos do GIT. Todo comando do GIT leva a palagra "git" na frente e o comando especifico do git logo pós. 
+
+> GIT INIT - Inicia o repositório
+
+> GIT ADD - Move arquivos e dar inicio ao versionamento
+
+>GIT COMMIT - Cria commits
+	Quando ele é criado, é crido com um autor.
+
+
+>  $ -a  -  Mostra arquivos ocultos
+
+	***  INICIANDO OS TRABALHOS ****
+
+
+	> Abra o git bassh
+	* você pode abrir o git bash de 2 maneiras
+
+	1 - direto na pasta onde você pretende trabalhar; ou
+	2 - pelo win.
+
+Se ao Iniciar o git bash não abrir na pasta que vc desejar, você pode navegar pelo terminal até chegar na pasta que deseja.
+
+> Supondo que você abriu o git bash pelo win, e não viu nenhum repositório familiar. Você pede ao git a lista do conteudo que existe no local onde vc está.
+
+	$ ls + enter
+	* Se não apareceu o repositório que está querendo, precisa começar a navegação pelo terminal.
+
+	$ cd /c/ + enter
+	$ ls
+	$ cd workspace
+	$ ls
+	$ cd workspace
+	$ ls + enter
+	
+Vamos criar uma pasta dentro desse repositório para iniciarmos nosso projeto ( projeto - livro¬receitas), pelo terminal.
+
+	$ mkdir + livro-receitas + enter
+
+
+
+
+
+
+
+	
+	$ git config -- global user.name + "seu email" + enter
+	$ git config --global user.name + "seu nome de usuário do github.com" + enter
+
+  >  Agora que criamos um arquivo dentro dessa pasta. Vamos cria um arquivo diferente do ".txt", chamado Markdown.
+
+
+	>> MARKDOWN  -  Nada mais é do uma forma mais humanizada de escrever um arquivo HTML. Arquivo que usa caracteres especiais como " # " para formatar o texto.
+
+	HTML - É a estrutura basica de qualquer página. É o esqueleto da página na web, h1,h2,h3,h4,h5
+
+ No MARKDOWN, para você escrever um título grande você coloca "#" antes. 
+
+Markdown - Nível 1= #			HTML - Nível 1 = h1
+Markdown - Nível 2= ##			HTML - Nível 2 = h2
+Markdown - Nível 3= ###			HTML - Nível 3 = h3
+Markdown - Nível 4= ####			HTML - Nível 4 = h4
+Markdown - Nível 5= #####			HTML - Nível 5 = h5
+
+
+O arquivo markdown é identificado pelo formato ( .md )
+
+No markdown podemos fazer coisa bem simples. Do simples ao mais complexo se quisermos. Bem charmosos para que nosso texto fique bem organizado.
+
+
+>> LEITOR DE ARQUIVO  .MD
+
+	Baixe um leitor de aquivo .md
+
+> Iniciando o git e criando commit dar algumas amostras de editor de .md
+
+> Abrir o arquivo "Strogonoff de frango", escrever a receita do strogonoff, salvar e fechar.
+
+>>> COMANDO
+
+	$ git add* + enter
+	$ git commit -m "commit inicial" + enter ( esse comando mostra quantas alterações foram feitas no arquivo. E os primeiros número do sha1.
+
+
+>> CICLO DA VIDA DOS ARQUIVOS NO GIT
+
+> PASSO A PASSO
+
+> UNTRACKED -  São arquivos que o git ainda não tem ciencia deles.
+
+> TRACKED - São arquivos que o git tem conhecimento deles
+
+> UNMODIFIED - É o arquivo que ainda não foi modificado
+
+> MODIFIED - É o arquivo que sofreu modificação
+
+> STAGED - É o local onde ficam os arquivos que estão se preparando para fazer de outro tipo de agrupamento.
+
+	* Quando você roda um arquivo GIT INIT você inicia um repositório
+
+>> Ambiente de desenvolvimento - tudo que está na nossa máquina
+
+>>  Servidor - Repositório remoto.
+
+
+$ cd – serve para entrar na pasta que você quer.
+
+	Ex. cd /c/workspace
+
+$ ls – ( lista o que tem dentro da pasta )
+
+$ cd livro-receitas + enter ( entra na pasta “livro de receitas )
+
+$ ls
+	Strogonoff de frango.md
+$ git status – ajuda a monitorar o status dos arquivos
+
+$ mkdir –  (cria pastas)
+
+$ mv – (move um arquivo de um lugar para o outro)
+
+$ mkdir receitas
+
+$ mv strogonoff de frango.md ./receitas + enter
+	>O arquivo strogonoff de frango foi movido para a pasta “receitas”
+
+$ ls + enter
+	Receitas (só tem a pasta “receitas”)
+
+$ cd receitas/
+	Strogonoff.md
+
+$ cd.. (Volta 1 nível) para sair de uma pasta
+Ctrl+L (para limpar a área do terminal)
+
+$ sl
+	Receitas/
+$ git status
+	>Solicita fazer “git add/rm das alterações recentes.
+
+$ git add strogonoff.md  receitas/ (comando feito porque não estava commitado)
+
+$ git status (mostra o status do arquivo)
+
+$ got commit –m “cria pasta receitas, move arquivos para receitas”
+
+$ echo> (cria o arquivo ( .txt / .md )
+
+$echo> readme.md
+
+$ ls
+
+$ git add * (pega tudo que foi modificado e adiciona para STAGED para poder commitar)
+
+$ ls
+
+$ git status
+
+$git commit –m “adiciona index”
+	(Mensagem do processo)
+
+####  TRABALHANDO  O GITHUB ###
+
+>> Para saber se as configurações do git desktop e github.com são iguais, usar comando
+
+$ git config –list
+
+	User.email tem que ser iguais tanto no site quanto no pc ( git / github )
+	User.name tem que ser iguais tanto no site quanto no pc ( git / github )
+
+*** caso o email e o name não sejam iguais, podemos alterar usando os comandos;
+$ git config  ¬¬global  ¬¬unset user.name   ( exclui o name das configurações )
+$ git config  ¬¬global  ¬¬unset user.email   ( exclui o name das configurações )
+
+Para inserir um email/name novamente, use os seguintes comandos
+
+$ git config  ¬¬global  user.name  “usuário do github”
+$ git config  ¬¬global  user.email   “seu email”
+
+>>>>>   CRIANDO UM REPOSITÓRIO GITHUB.COM <<<<<<<
+
+>>>>  NO SITE
+
+>> Seus repositórios >> novo >> da o nome ao arquivo.
+>>descrição ( opcional) >> pub. Ou priv. ( opoicional ) >> criar repositório>> ( repositório criado )
+
+Depois de criado, o github já sugere o que fazer.
+ - Ir no repositório local e apontar nosso repositório local ( RL ) para o repositório do github.com.
+O endereço do repositório github é uma URL HTTPS
+
+>> Vamos agora empurrar nosso repositório local ( RL ) para o repositório remoto ( RR )
+
+>> Adicionar origem
+
+$ git remote add origin + “o link copiado”
+	Se não aparecer nenhuma mensagem. deu tudo certo
+
+$ git remote -v
+
+
+>>>>> COMO OS CONFLITOS ACONTECEM NO GITHUB E COMO RESOLVÊ-LOS <<<<<<<
+
+		Quando una outra pessoa clona seu repositório para maquina dele e faz uma alteração usando no arquivo exatamente na mesma linha que você. Mas a pessoa subiu o arquivo para o servidor você ainda não.
+O GIT vai deixar você abrir o arquivo mais recente e você resolve esse conflito manualmente e depois empurre o código para o github
+
+$ git pull origin master
+
+-depois de resolver o conflito manualmente, seguir os passos;
+$ git status
+$ git add *
+$ git commit –m “resolve conflito”
+$ git push origin máster
+
+
+>>>>>>>  COMO BAIXAR UM REPOSITÓRIO   <<<<<<
+
+No site
+>> clicar em “ <>code” >> clicar em code >> copiar URL
+
+$ ls	( ir pro diretório base ( workspace))
+$ git clone + ( paste “colar”)
+	Aguardar o carregamento completo
+
+$ ls
+$ cd cpython ( cpython – foi a pasta baixada )
+$ ls –a ( pra mostrar todas as pastas ocultas )
+$ git remote –v ( mostra os RR na qual esse repositório que foi baixado está apontado )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

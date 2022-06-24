@@ -3,3 +3,7 @@ Lik para download do git
 https://gitforwindows.org/
 
 O gitbash é um terminal estendido para otimizar o uso do git.
+
+
+Explicações de alguns
+https://dev.to/dxwebster/como-conectar-ao-github-com-chaves-ssh-1i41
